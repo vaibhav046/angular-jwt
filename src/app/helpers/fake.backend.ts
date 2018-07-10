@@ -16,7 +16,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let testUser = { id: 1, username: 'test', password: 'test', firstname: 'Test', lastname: 'Test' }
 
         return Observable.of(null).mergeMap(() => {
-            if (request.url.endsWith('/api/authenticate') && request.method === "POST") {
+            if (request.url.includes('api/authenticate') && request.method === "POST") {
                 if (request.body.username === testUser.username && request.body.password === testUser.password) {
                     return Observable.of(new HttpResponse({ status: 200, body: { token: 'fake-jwt-token' } }));
                 }
